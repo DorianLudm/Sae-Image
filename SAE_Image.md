@@ -15,7 +15,8 @@ Expliquons désormais les valeurs que nous pouvons voir sur cette image:
 - L'adresse 0xOE permet de donner la taille de ce second en-tête. Cette taille est défini sur 4 octets.
 - La largeur et la auteur de l'image sont respectivement définis aux adresses 0x12 et 0x16 sur 4 octets chaqu'un.  
   
-  
+Lorsqu'on essaye d'ouvrir l'image, on obtient l'erreur suivante:  
+![Code de l'erreur de l'image A0](/RenduImages/Error_A0.png) 
 Question 1:  
 
 Question 2:  
