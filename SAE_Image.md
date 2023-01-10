@@ -16,7 +16,8 @@ Expliquons désormais les valeurs que nous pouvons voir sur cette image:
 - La largeur et la auteur de l'image sont respectivement définis aux adresses 0x12 et 0x16 sur 4 octets chaqu'un.  
   
 Lorsqu'on essaye d'ouvrir l'image, on obtient l'erreur suivante:  
-![Code de l'erreur de l'image A0](/RenduImages/Error_A0.png) 
+![Code de l'erreur de l'image A0](/RenduImages/Error_A0.png)  
+Celle-ci se trouve par le fait que la taille du fichier entrée à l'adresse 0x02 n'est pas égale à la taille réelle du fichier. En effet, on code 99 73 0C 00 alors que le fichier possède une taille de 9A 73 0C 00 
 Question 1:  
 
 Question 2:  
