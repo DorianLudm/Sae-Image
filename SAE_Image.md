@@ -56,7 +56,8 @@ L'encodage des pixels seras détaillé ci-dessous
 ![Code de l'image 3](/RenduImages/Image3_Code.png)  
 ![Image 3](/RenduImages/Image3_Rendu.png)  
 Il suffit alors de mettre un 0 pour un pixel rouge, et un 1 pour un pixel blanc!
-- 
+- En lisant l'adresse 0x2E de l'image exemple index, on peut lire qu'elle possède 16 couleurs différentes.
+- Le blanc étant la couleur dominante dans l'image, elle se retrouve alors majoritairement dans le codage de celle-ci. 
   
 ### Question 5:  
 
