@@ -32,13 +32,23 @@ Pour efficacement arriver à l'image demandée dans cette question, on remarque 
 ### Question 3:  
 Pour répondre aux questions posées dans la question A.3, on utiliseras la documentation disponible via le lien [suivant](https://www.apprendre-en-ligne.net/info/images/formatbmp.pdf)  
 
-- Pour trouver le nombre de bits par pixel, on lit l'adresse 0x1C sur 2 octets. Les deux images utilisent 18 bits par pixels, c'est à dire que chaque couleur primaire du codage RVB peut être parmis 256 possibilitées.
+- L'image 1 possède alors un point de 102 bits.
+- Pour trouver le nombre de bits par pixel, on lit l'adresse 0x1C sur 2 octets. Les deux images utilisent 18 biarts par pixels, c'est à dire que chaque couleur primaire du codage RVB peut être parmis 256 possibilitées.
 - Pour l'image 1, l'adresse 0x22 nous informe que la taille des données pixels est de 48 bits, codés par l'hexadécimal 30. Cette réponse peut aussi se retrouver par le calcul hauteur X largeur X nombre d'octets par pixel, soit 4x4x3= 48. Cette donnée n'est par ailleurs par disponible sur l'image 0.
 - Pour définir si une compression est utilisé, il faut lire l'adresse 0x1E et regarder si la valeur est différente de 0. Pour l'image 1, on retrouve effectivement que cette valeur est nulle, ce qui signifie qu'aucune compression est utilisée.
-- Enfin, l'encodage des pixels reste le même, on retrouve toujours le même ensemble de valeurs. Ils sont toujours codés en RVB, avec un octet couleur
+- Enfin, l'encodage des pixels reste le même, on retrouve toujours le même ensemble de valeurs. Ils sont toujours codés en RVB, avec un octet couleur.
   
 ### Question 4:  
-
+- Comme dit précédemment, c'est l'adresse 0x1C qui encode le nombre de bits pixel. Pour l'image 2, on peut trouver que chaque bit est encodé par un unique bit, alors que les images précédentes avait pour valeur 48 bits!
+- La taille des données pixels (lisible à l'adresse 0x22) est de 16 bits, soit trois fois moins que la taille des autres images.
+- L'adresse 0x1E ayant pour valeur 0, on peut en conclure que l'image n'utilise pas de compression
+- Comment sont codées les couleurs de la palette.  
+Pour commencer, les couleurs de la palette sont définis après le bitmap info holder, et le nombre de couleurs dans la palette peut se trouver à l'adresse 0x2E. Dans la zone de définition des couleurs, celle-ci sont codées en RVBA (Rouge Vert Bleu Alpha) avec A l'indice de transparence de la couleur, chaque couleur est donc codée sur 32 bits.  
+L'encodage des pixels seras détaillé ci-dessous
+- Comme dit au-dessus, à l'aide de l'adresse 0x2E, on peut trouver que l'image 2 possède 2 couleurs qui sont le rouge et le blanc
+- Pour ce qui est de l'encodage des pixels eux-mêmes, pour associer un pixel avec une couleur de la palette, il suffit d'appeler le numéro de palette sachant qu'elle à pour index 0. C'est à dire que pour la seconde couleur que nous avons codés, il suffit de mettre la valeur du bit à 1. Pour cette image, par le fait qu'elle ai seulement deux couleurs, chaque couleur est défini sur 1 bit, ce qui nous permet alors d'encoder les pixels via le binaire.
+- 
+  
 ### Question 5:  
 
 ### Question 6:  
