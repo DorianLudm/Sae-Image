@@ -66,8 +66,17 @@ D'un point de vu viseul, on obtient alors l'image ci-contre:
 ![Image exemple index, mais avec moins de couleurs](/RenduImages/ImageIndex2_Rendu.png)  
   
 ### Question 5:  
-
+Rappelant que la hauteur de l'image est défini à l'adresse 0x16, est que l'image 3 possède une hauteur de 00 00 00 04, pour trouver l'inverse on utilise l'encodage C2. FF FF FF FF représentant -1, FC FF FF FF est alors égal à -4! On obtient alors l'image suivante où l'ordre des lignes est inversé, c'est à dire que l'encodage ce fait du haut vers le bas:  
+![Image 3 inversé](/RenduImages/Image3Reverse_Rendu.png)  
+De la même façon, on peut retourner le logo de l'iut pour obtenir l'image suivante  
+![Image exemple inversé](/RenduImages/ImageExempleReverse_Rendu.png) 
+  
 ### Question 6:  
+Suite à l'application de la conversion RLE, l'image 4 possède un poid de 1120 octets. Ce poid s'explique par le fait que la compression RLE créer une palette de 256 couleurs, même si l'image en utilise que deux.  
+La zone de définition des pixels se retrouve à l'adresse 0x0A où on peut trouver l'adresse 0x0436.  
+Explication de l'encodage des pixels:  
+- La compression RLE est intuitive et se base sur le codage par index de couleur, avec pour différence le fait qu'on ajoute le nombre de pixels conséquent qui auront cette couleur. C'est à dire qu'une ligne de pixel rouge-rouge-blanc-rouge seras codé 02 00 (2x rouge) 01 01 (1x blanc) 01 00 (1x rouge).  
+- De plus, on retrouve des 00 00 et 00 01 dans le code hexadécimal du codage des pixels. 00 00 signifie que c'est la fin de la ligne, et 00 01 la fin de l'image.  
 
 ### Question 7:
 
