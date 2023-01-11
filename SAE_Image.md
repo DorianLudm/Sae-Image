@@ -26,7 +26,7 @@ En suivant la documentation donnée au début de la question, on peut facilement
 ![Image 0](/RenduImages/Image0_Rendu.png) 
 
 ### Question 2:  
-Pour efficacement arriver à l'image demandée dans cette question, on remarque que le fond est majoritairement rouge, ce qui nous permet alors de faciliter la construction en encodant tout les pixels avec 00 00 FF pour afficher une couleur rouge. Suite à cela, on ajoute alors les autres couleurs par dessus. Pour trouver facilement l'encodage des couleurs, on peut utiliser ctrl + F pour rechercher le nom de la couleur voulue, au lieu de la rechercher parmis les centaines de couleurs listées. Une fois avoir changer les 6 pixels qui ne sont pas rouges, on obtient alors l'image suivante:
+Pour efficacement arriver à l'image demandée dans cette question, on remarque que le fond est majoritairement rouge, ce qui nous permet alors de faciliter la construction en encodant tout les pixels avec 00 00 FF pour afficher une couleur rouge. Suite à cela, on ajoute alors les autres couleurs par dessus. Pour trouver facilement l'encodage des couleurs, on peut utiliser ctrl + F pour rechercher le nom de la couleur voulue, au lieu de la rechercher parmis les centaines de couleurs listées. Une fois avoir changer les 6 pixels qui ne sont pas rouges, on obtient alors l'image suivante:  
 ![Image Test](/RenduImages/Imagetest_Rendu.png) 
 
 ### Question 3:  
@@ -47,6 +47,15 @@ Pour commencer, les couleurs de la palette sont définis après le bitmap info h
 L'encodage des pixels seras détaillé ci-dessous
 - Comme dit au-dessus, à l'aide de l'adresse 0x2E, on peut trouver que l'image 2 possède 2 couleurs qui sont le rouge et le blanc
 - Pour ce qui est de l'encodage des pixels eux-mêmes, pour associer un pixel avec une couleur de la palette, il suffit d'appeler le numéro de palette sachant qu'elle à pour index 0. C'est à dire que pour la seconde couleur que nous avons codés, il suffit de mettre la valeur du bit à 1. Pour cette image, par le fait qu'elle ai seulement deux couleurs, chaque couleur est défini sur 1 bit, ce qui nous permet alors d'encoder les pixels via le binaire.
+- Pour changer tout les pixels rouge en pixels bleu, il suffit de modifier le code de la couleur rouge pour qu'elle code du bleu. Pour cela, on modifie alors l'adresse 0x36 et on obtient le code et l'image ci-dessous:  
+![Code de l'image bleue](/RenduImages/ImageBleue_Code.png)  
+![Image bleue](/RenduImages/ImageBleue_Rendu.png)  
+- Pour inverser les damiers de l'image bleue, il y a deux possiblités. Soit on inverse le codage des couleurs dans la palette elle même, soit on change le codage des pixels. La possibilité 1 est certainement la meilleure, surtout à grande échelle, par le fait qu'il faille uniquement changer 8 octets alors qu'il faudrais en modifier un nombre qui tend vers l'infini plus l'image est grande.  
+![Image bleue inverse](/RenduImages/ImageBleueInverse_Rendu.png)  
+- Comme dit précédemment, utilisé le binaire est bien plus intuitif pour codé des images avec une palette de deux couleurs, en voilà la raison:  
+![Code de l'image 3](/RenduImages/Image3_Code.png)  
+![Image 3](/RenduImages/Image3_Rendu.png)  
+Il suffit alors de mettre un 0 pour un pixel rouge, et un 1 pour un pixel blanc!
 - 
   
 ### Question 5:  
