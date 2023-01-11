@@ -50,14 +50,20 @@ L'encodage des pixels seras détaillé ci-dessous
 - Pour changer tout les pixels rouge en pixels bleu, il suffit de modifier le code de la couleur rouge pour qu'elle code du bleu. Pour cela, on modifie alors l'adresse 0x36 et on obtient le code et l'image ci-dessous:  
 ![Code de l'image bleue](/RenduImages/ImageBleue_Code.png)  
 ![Image bleue](/RenduImages/ImageBleue_Rendu.png)  
-- Pour inverser les damiers de l'image bleue, il y a deux possiblités. Soit on inverse le codage des couleurs dans la palette elle même, soit on change le codage des pixels. La possibilité 1 est certainement la meilleure, surtout à grande échelle, par le fait qu'il faille uniquement changer 8 octets alors qu'il faudrais en modifier un nombre qui tend vers l'infini plus l'image est grande.  
+- Pour inverser les damiers de l'image bleue, il y a deux possiblités. Soit on inverse le codage des couleurs dans la palette elle même, soit on change le codage des pixels. La possibilité 1 est certainement la meilleure, surtout à grande échelle, par le fait qu'il faille uniquement changer 8 octets alors qu'il faudrais en modifier un nombre qui tend vers l'infceini plus l'image est grande.  
 ![Image bleue inverse](/RenduImages/ImageBleueInverse_Rendu.png)  
 - Comme dit précédemment, utilisé le binaire est bien plus intuitif pour codé des images avec une palette de deux couleurs, en voilà la raison:  
 ![Code de l'image 3](/RenduImages/Image3_Code.png)  
 ![Image 3](/RenduImages/Image3_Rendu.png)  
 Il suffit alors de mettre un 0 pour un pixel rouge, et un 1 pour un pixel blanc!
-- En lisant l'adresse 0x2E de l'image exemple index, on peut lire qu'elle possède 16 couleurs différentes.
-- Le blanc étant la couleur dominante dans l'image, elle se retrouve alors majoritairement dans le codage de celle-ci. 
+- En lisant l'adresse 0x2E de l'image exemple index, on peut lire qu'elle possède 16 couleurs différentes. Chaque pixel va donc être codé sur un octet (16 = 2⁴, donc il faut 4 prévoir 4 bits pour appeler les couleurs de la palette)
+- Le blanc étant la couleur dominante dans l'image, elle se retrouve alors majoritairement dans le codage de celle-ci. On peut retrouver alors un grand nombre de C qui se repète. On peut alors déduire que ce C est la couleur blanche qui est majoritaire dans l'image. C étant égale à 12, la couleur blanche est la 13ème à être codée dans la palette de couleur. La couleur majoritaire est donc codée à l'adresse 0x66!
+- Pour trouver où commence le tableau de pixel, il suffit de lire l'adresse 0x0A où on peuttrouver comme valeur 76. Ce 76 signifie que l'adresse 0x76 est le début de la zone de définition des pixels.
+- En changeant quelque pixels de l'adresse 0x76 à 0x7A de C à 0, on peut remarquer que le coin inférieur gauche de l'image a effectivement été affecté de manière suivante:  
+![Coin inférieur droit zoomer de l'image à l'aide de GIMP](/RenduImages/ExtraitGimp.png)  
+- En diminuant le nombre de couleurs dans l'image exemple index, on obtient l'image exemple index 2, qui possède alors un nombre de couleur plus faible. Cette seconde version possède toujours 16 couleurs selon l'adresse 0x2E, et c'est par le fait qu'on retrouve en effet 16 couleurs dans la palette, mais qu'une majorité soit désormais égale à 00 00 00 00.  
+D'un point de vu viseul, on obtient alors l'image ci-contre:  
+![Image exemple index, mais avec moins de couleurs](/RenduImages/ImageIndex2_Rendu.png)  
   
 ### Question 5:  
 
