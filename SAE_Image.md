@@ -22,6 +22,8 @@ Lorsqu'on essaye d'ouvrir l'image, on obtient l'erreur suivante:
 Celle-ci se trouve par le fait que la taille du fichier entrée à l'adresse 0x02 n'est pas égale à la taille réelle du fichier. En effet, on code 99 73 0C 00 alors que le fichier possède une taille de 9A 73 0C 00  
 
 Question 1:  
+En suivant la documentation donnée au début de la question, on peut facilement recoder une image de 4x4 facilement.  
+![Image 0](/RenduImages/Image0_Rendu.png) 
 
 Question 2:  
 
