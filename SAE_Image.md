@@ -78,7 +78,9 @@ Explication de l'encodage des pixels:
 - La compression RLE est intuitive et se base sur le codage par index de couleur, avec pour différence le fait qu'on ajoute le nombre de pixels conséquent qui auront cette couleur. C'est à dire qu'une ligne de pixel rouge-rouge-blanc-rouge seras codé 02 00 (2x rouge) 01 01 (1x blanc) 01 00 (1x rouge).  
 - De plus, on retrouve des 00 00 et 00 01 dans le code hexadécimal du codage des pixels. 00 00 signifie que c'est la fin de la ligne, et 00 01 la fin de l'image.  
 
-### Question 7:
+### Question 7:  
+L'image 5 pèse 1102 octet, ce qui est plus petit que l'image 4. Ceci s'explique par le fait que l'image 5 possède des répétitions de pixels alors que l'image 4 n'en possède pas, ce qui rend la compression RLE plus efficace.  
+En différence au codage de l'image 4, on trouve le codage 04 00 (4 rouge) 04 01 (4 blanc) 04 00 (4 rouge) qui est là, source de la baisse du poid de l'image.  
 
 ### Question 8:  
 
