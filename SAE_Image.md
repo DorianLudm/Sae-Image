@@ -85,6 +85,9 @@ En différence au codage de l'image 4, on trouve le codage 04 00 (4 rouge) 04 01
 
 ### Question 8, 9 et 10:  
 Pour les question 8 à 10, on doit modifier le codage des pixels ainsi que la palette de couleur pour les question 9 et 10. Une fois avoir modifié les images, on obtient les images suivantes:  
-![Image 6](/RenduImages/Image6_Rendu.png)
+![Image 6](/RenduImages/Image6_Rendu2.png)
 ![Image 7](/RenduImages/Image7_Rendu.png)
 ![Image 8](/RenduImages/Image8_Rendu.png)  
+Pour réduire la taille de l'image 8, il suffit de supprimer les 252 couleurs non utilisés dans la palette de couleur et de redéfinir les valeurs de l'en-tête (poid de l'image, nombre de couleur dans la palette, ect)  
+![Poid image 9](/RenduImages/Image9Poid_Rendu.png)  
+![Image 9](/RenduImages/Image9_Rendu.png)  
