@@ -20,7 +20,7 @@ Expliquons désormais les valeurs que nous pouvons voir sur cette image:
 Lorsqu'on essaye d'ouvrir l'image, on obtient l'erreur suivante:  
 ![Code de l'erreur de l'image A0](/RenduImages/Error_A0.png)  
 Celle-ci se trouve par le fait que la taille du fichier entrée à l'adresse 0x02 n'est pas égale à la taille réelle du fichier. En effet, on code 99 73 0C 00 alors que le fichier possède une taille de 9A 73 0C 00  
-
+width or height exceeds limit
 ### Question 1:  
 En suivant la documentation donnée au début de la question, on peut facilement recoder une image de 4x4 facilement.  
 ![Image 0](/RenduImages/Image0_Rendu.png) 
@@ -35,14 +35,10 @@ Pour répondre aux questions posées dans la question A.3, on utiliseras la docu
 - L'image 1 possède alors un point de 102 bits.
 - Pour trouver le nombre de bits par pixel, on lit l'adresse 0x1C sur 2 octets. Les deux images utilisent 18 biarts par pixels, c'est à dire que chaque couleur primaire du codage RVB peut être parmis 256 possibilitées.
 - Pour l'image 1, l'adresse 0x22 nous informe que la taille des données pixels est de 48 bits, codés par l'hexadécimal 30. Cette réponse peut aussi se retrouver par le calcul hauteur X largeur X nombre d'octets par pixel, soit 4x4x3= 48. Cette donnée n'est par ailleurs par disponible sur l'image 0.
-- Pour définir si une compression est utilisé, il faut lire l'adresse 0x1E et regarder si la valeur est différente de 0. Pour l'image 1, on retrouve effectivement que cette valeur est nulle, ce qui signifie qu'aucune compression est utilisée.
-- Enfin, l'encodage des pixels reste le même, on retrouve toujours le même ensemble de valeurs. Ils sont toujours codés en RVB, avec un octet couleur.
-  
-### Question 4:  
-- Comme dit précédemment, c'est l'adresse 0x1C qui encode le nombre de bits pixel. Pour l'image 2, on peut trouver que chaque bit est encodé par un unique bit, alors que les images précédentes avait pour valeur 48 bits!
-- La taille des données pixels (lisible à l'adresse 0x22) est de 16 bits, soit trois fois moins que la taille des autres images.
-- L'adresse 0x1E ayant pour valeur 0, on peut en conclure que l'image n'utilise pas de compression
-- Comment sont codées les couleurs de la palette.  
+- Pour définir si une compression est utilisé, il faut lire l'adresse 0x1E et regarder si la valeur est différente de 0. Pour l'image 1, on retrouve effectivement que cette valeur est nulle, ce qui signifie qu'aucune compression est u
+Skip course categories
+Course categories
+Etudiants - PAONe la palette.  
 Pour commencer, les couleurs de la palette sont définis après le bitmap info holder, et le nombre de couleurs dans la palette peut se trouver à l'adresse 0x2E. Dans la zone de définition des couleurs, celle-ci sont codées en RVBA (Rouge Vert Bleu Alpha) avec A l'indice de transparence de la couleur, chaque couleur est donc codée sur 32 bits.  
 L'encodage des pixels seras détaillé ci-dessous
 - Comme dit au-dessus, à l'aide de l'adresse 0x2E, on peut trouver que l'image 2 possède 2 couleurs qui sont le rouge et le blanc
@@ -50,14 +46,19 @@ L'encodage des pixels seras détaillé ci-dessous
 - Pour changer tout les pixels rouge en pixels bleu, il suffit de modifier le code de la couleur rouge pour qu'elle code du bleu. Pour cela, on modifie alors l'adresse 0x36 et on obtient le code et l'image ci-dessous:  
 ![Code de l'image bleue](/RenduImages/ImageBleue_Code.png)  
 ![Image bleue](/RenduImages/ImageBleue_Rendu.png)  
-- Pour inverser les damiers de l'image bleue, il y a deux possiblités. Soit on inverse le codage des couleurs dans la palette elle même, soit on change le codage des pixels. La possibilité 1 est certainement la meilleure, surtout à grande échelle, par le fait qu'il faille uniquement changer 8 octets alors qu'il faudrais en modifier un nombre qui tend vers l'infceini plus l'image est grande.  
+- Pour inverser les damiers de l'imag
+Skip course categories
+Course categories
+Etudiants - PAONest certainement la meilleure, surtout à grande échelle, par le fait qu'il faille uniquement changer 8 octets alors qu'il faudrais en modifier un nombre qui tend vers l'infceini plus l'image est grande.  
 ![Image bleue inverse](/RenduImages/ImageBleueInverse_Rendu.png)  
 - Comme dit précédemment, utilisé le binaire est bien plus intuitif pour codé des images avec une palette de deux couleurs, en voilà la raison:  
 ![Code de l'image 3](/RenduImages/Image3_Code.png)  
 ![Image 3](/RenduImages/Image3_Rendu.png)  
 Il suffit alors de mettre un 0 pour un pixel rouge, et un 1 pour un pixel blanc!
 - En lisant l'adresse 0x2E de l'image exemple index, on peut lire qu'elle possède 16 couleurs différentes. Chaque pixel va donc être codé sur un octet (16 = 2⁴, donc il faut 4 prévoir 4 bits pour appeler les couleurs de la palette)
-- Le blanc étant la couleur dominante dans l'image, elle se retrouve alors majoritairement dans le codage de celle-ci. On peut retrouver alors un grand nombre de C qui se repète. On peut alors déduire que ce C est la couleur blanche qui est majoritaire dans l'image. C étant égale à 12, la couleur blanche est la 13ème à être codée dans la palette de couleur. La couleur majoritaire est donc codée à l'adresse 0x66!
+Skip course categories
+Course categories
+Etudiants - PAONante dans l'image, elle se retrouve alors majoritairement dans le codage de celle-ci. On peut retrouver alors un grand nombre de C qui se repète. On peut alors déduire que ce C est la couleur blanche qui est majoritaire dans l'image. C étant égale à 12, la couleur blanche est la 13ème à être codée dans la palette de couleur. La couleur majoritaire est donc codée à l'adresse 0x66!
 - Pour trouver où commence le tableau de pixel, il suffit de lire l'adresse 0x0A où on peuttrouver comme valeur 76. Ce 76 signifie que l'adresse 0x76 est le début de la zone de définition des pixels.
 - En changeant quelque pixels de l'adresse 0x76 à 0x7A de C à 0, on peut remarquer que le coin inférieur gauche de l'image a effectivement été affecté de manière suivante:  
 ![Coin inférieur droit zoomer de l'image à l'aide de GIMP](/RenduImages/ExtraitGimp.png)  
@@ -82,8 +83,8 @@ Explication de l'encodage des pixels:
 L'image 5 pèse 1102 octet, ce qui est plus petit que l'image 4. Ceci s'explique par le fait que l'image 5 possède des répétitions de pixels alors que l'image 4 n'en possède pas, ce qui rend la compression RLE plus efficace.  
 En différence au codage de l'image 4, on trouve le codage 04 00 (4 rouge) 04 01 (4 blanc) 04 00 (4 rouge) qui est là, source de la baisse du poid de l'image.  
 
-### Question 8:  
-
-### Question 9:  
-
-### Question 10:  
+### Question 8, 9 et 10:  
+Pour les question 8 à 10, on doit modifier le codage des pixels ainsi que la palette de couleur pour les question 9 et 10. Une fois avoir modifié les images, on obtient les images suivantes:  
+![Image 6](/RenduImages/Image6_Rendu.png)
+![Image 7](/RenduImages/Image7_Rendu.png)
+![Image 8](/RenduImages/Image8_Rendu.png)  
