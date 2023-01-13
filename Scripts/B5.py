@@ -27,3 +27,13 @@ for y in range(i.size[1]): #Colonne
             matrice[x][y] = 0 #Le pixel est noir
 
 #On cache l'image à cacher dans l'image modifiée
+i = Image.open("./Images/Imageout_steg_0.bmp")
+sortie = i.copy()
+for y in range(i.size[1]): #Colonne
+    for x in range(i.size[0]): #Ligne
+        c = i.getpixel((x,y))
+        if matrice[x][y] == 0:
+            sortie.putpixel((x,y),(255,255,255))
+        else:
+            sortie.putpixel((x,y),(0,0,0))
+sortie.save("./Images/ImageCacheDecodee.bmp")
