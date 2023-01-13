@@ -1,7 +1,7 @@
 from PIL import Image
 
 #On modifie l'image initiale
-i = Image.open("./Images/Imagetest.bmp")
+i = Image.open("./Images/hall-mod_0.bmp")
 sortie = i.copy()
 for y in range(i.size[1]): #Colonne
     for x in range(i.size[0]): #Ligne
@@ -26,14 +26,14 @@ for y in range(i.size[1]): #Colonne
         else:
             matrice[x][y] = 0 #Le pixel est noir
 
-#On cache l'image à cacher dans l'image modifiée
+#On trouve l'image à cacher dans l'image modifiée
 i = Image.open("./Images/Imageout_steg_0.bmp")
 sortie = i.copy()
 for y in range(i.size[1]): #Colonne
     for x in range(i.size[0]): #Ligne
         c = i.getpixel((x,y))
-        if matrice[x][y] == 0:
+        if x < len(matrice)  and y < len(matrice[0]) and matrice[x][y] == 255:
             sortie.putpixel((x,y),(255,255,255))
-        else:
+        elif x < len(matrice) and y < len(matrice[0]) and  matrice[x][y] == 0:
             sortie.putpixel((x,y),(0,0,0))
 sortie.save("./Images/ImageCacheDecodee.bmp")

@@ -1,6 +1,6 @@
 from PIL import Image
 
-i = Image.open("./Images/ImageExemple.bmp")
+i = Image.open("./Images/ImageExemple2.bmp")
 sortie = i.copy()
 for y in range(i.size[1]): #Colonne
     for x in range(i.size[0]): #Ligne
