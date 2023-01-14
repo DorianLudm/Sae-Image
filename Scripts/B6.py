@@ -15,7 +15,7 @@ for y in range(i.size[1]): #Colonne
 sortie.save("./Images/Imageout_steg_1.bmp")
 
 #On obtient les valeurs de l'image à chacher
-text = "Texte à cacher!"
+text = "Ce texte va etre cache dans l'image" #Attention, il à la longueur de la chaine de charactères. Celle-ci ne doit pas dépasser 1/3 des pixels de l'image
 list_val = []
 for character in text:
     character_ascii = ord(character)
@@ -23,26 +23,26 @@ for character in text:
     while len(character_binary) < 8:
         character_binary = "0" + character_binary
     list_val.append(character_binary)
-
+    
 #On encode l'image
 i = Image.open("./Images/Imageout_steg_1.bmp")
 counter = -1
 for pixel in range(0,(i.size[0])*(i.size[1]),3):
     counter +=1 
     y = pixel%(i.size[1]) #Colonne
-    x = (pixel+1)%(i.size[0])#Ligne
+    x = (pixel-y)//(i.size[0]-1)#Ligne
     if y + 1 >= i.size[1] or y + 2 >= i.size[1]:
         continue
     else:
         c1 = i.getpixel((x,y))
         c2 = i.getpixel((x,y+1))
         c3 = i.getpixel((x,y+2))
-        sortie.putpixel((x,y),(c1[0]+int(list_val[counter][0]),c1[1]+int(list_val[counter][1]),c1[2]+int(list_val[counter][2])))
-        sortie.putpixel((x,y+1),(c2[0]+int(list_val[counter][3]),c2[1]+int(list_val[counter][4]),c2[2]+int(list_val[counter][5])))
-        sortie.putpixel((x,y+2),(c3[0]+int(list_val[counter][6]),c3[1]+int(list_val[counter][7]),c3[2]+(counter+1 >= len(text))))
+        i.putpixel((x,y),(c1[0]+int(list_val[counter][0]),c1[1]+int(list_val[counter][1]),c1[2]+int(list_val[counter][2])))
+        i.putpixel((x,y+1),(c2[0]+int(list_val[counter][3]),c2[1]+int(list_val[counter][4]),c2[2]+int(list_val[counter][5])))
+        i.putpixel((x,y+2),(c3[0]+int(list_val[counter][6]),c3[1]+int(list_val[counter][7]),c3[2]+(counter+1 >= len(text))))
         if (counter+1 >= len(text)):
             break
-
+i.save("./Images/Imageout_steg_1.bmp")
 
 
 ###PARTIE DECODAGE###
@@ -51,15 +51,19 @@ for pixel in range(0,(i.size[0])*(i.size[1]),3):
 Stop = False
 res = ""
 i = Image.open("./Images/Imageout_steg_1.bmp")
-for y in range(i.size[1]): #Colonne
-    for x in range(i.size[0]): #Ligne
-        if y + 1 >= i.size[1] or y + 2 >= i.size[1] or Stop:
-            continue
-        else:
-            c1 = i.getpixel((x,y))
-            c2 = i.getpixel((x,y+1))
-            c3 = i.getpixel((x,y+2))
-            if c3[2]%2 == 1:
-                Stop = True
-            else:
-                character_binary = str(c1[0]%2) + str(c1[1]%2) + str(c1[2]%2) + str(c2[0]%2) + str(c2[1]%2) + str(c2[2]%2) + str(c3[0]%2) + str(c3[1]%2)
+for pixel in range(0,(i.size[0])*(i.size[1]),3):
+    counter +=1 
+    y = pixel%(i.size[1]) #Colonne
+    x = (pixel-y)//(i.size[0]-1)#Ligne
+    if Stop:
+        break
+    elif y + 1 >= i.size[1] or y + 2 >= i.size[1]:
+        continue
+    else:
+        c1 = i.getpixel((x,y))
+        c2 = i.getpixel((x,y+1))
+        c3 = i.getpixel((x,y+2))
+        character_binary = str(c1[0]%2) + str(c1[1]%2) + str(c1[2]%2) + str(c2[0]%2) + str(c2[1]%2) + str(c2[2]%2) + str(c3[0]%2) + str(c3[1]%2)
+        res += chr(int(character_binary,2))
+        Stop = c3[2]%2 == 1
+print(res)
