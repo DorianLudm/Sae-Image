@@ -91,3 +91,6 @@ Pour les question 8 à 10, on doit modifier le codage des pixels ainsi que la pa
 Pour réduire la taille de l'image 8, il suffit de supprimer les 252 couleurs non utilisés dans la palette de couleur et de redéfinir les valeurs de l'en-tête (poid de l'image, nombre de couleur dans la palette, ect)  
 ![Poid image 9](/RenduImages/Image9Poid_Rendu.png)  
 ![Image 9](/RenduImages/Image9_Rendu.png)  
+
+## Partie B  
+
