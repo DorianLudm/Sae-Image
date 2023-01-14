@@ -48,4 +48,18 @@ for pixel in range(0,(i.size[0])*(i.size[1]),3):
 ###PARTIE DECODAGE###
 
 #On décode désormais l'image
+Stop = False
+res = ""
 i = Image.open("./Images/Imageout_steg_1.bmp")
+for y in range(i.size[1]): #Colonne
+    for x in range(i.size[0]): #Ligne
+        if y + 1 >= i.size[1] or y + 2 >= i.size[1] or Stop:
+            continue
+        else:
+            c1 = i.getpixel((x,y))
+            c2 = i.getpixel((x,y+1))
+            c3 = i.getpixel((x,y+2))
+            if c3[2]%2 == 1:
+                Stop = True
+            else:
+                character_binary = str(c1[0]%2) + str(c1[1]%2) + str(c1[2]%2) + str(c2[0]%2) + str(c2[1]%2) + str(c2[2]%2) + str(c3[0]%2) + str(c3[1]%2)
