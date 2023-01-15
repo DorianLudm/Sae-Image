@@ -116,4 +116,6 @@ Pour ce qui est du décodage, on utilise le procédé inverse, c'est à dire que
 ### Question 6:  
 
 Encoder un texte dans une image est bien plus complexe que d'encoder une image dans une image (si l'image à cacher est en noire et blanc cela dit) par le fait qu'un seul charactère est définit sur 8 bits en ASCII.  
-Il y a alors plusieurs possibilité, mais une seule est retenu par le fait qu'on ne peut pas modifier l'image initiale (du moins, ca ne doit pas être visible à l'oeil nu). On va alors utiliser la même méthode que le script B5.py mais un charactère va être encodé sur chaque composante RGB de 3 pixels! En effet, il y a 8 bits pour définir le charactère lui même, il reste alors un 9ème bit disponible. Ce neuvième bit sera utilisé pour définir si on doit continuer de décoder ou si l'entièreté du message à été décodé
+Il y a alors plusieurs possibilité, mais une seule est retenu par le fait qu'on ne peut pas modifier l'image initiale (du moins, ca ne doit pas être visible à l'oeil nu). On va alors utiliser la même méthode que le script B5.py mais un charactère va être encodé sur chaque composante RGB de 3 pixels! En effet, il y a 8 bits pour définir le charactère lui même, il reste alors un 9ème bit disponible. Ce neuvième bit sera utilisé pour définir si on doit continuer de décoder ou si l'entièreté du message à été décodé.  
+Enfin, il faut transformé chaque charactère du message en ASCII, puis en binaire avant de pouvoir l'intégrer des les pixels!
+Pour ce qui du décodage, on refais une nouvelle fois le procédé inverse.
