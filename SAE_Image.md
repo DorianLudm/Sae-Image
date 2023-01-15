@@ -137,3 +137,8 @@ On peut alors comprendre l'importance de la surveillance de masse, surtout sur l
 La clé de Solitaire permet alors de répondre à la problématique posé par le chiffre de Vernam vu précédemment et cette clé peut être encodée de la même facon que le chiffre de Vernam dans une image (voir script B7.py et B8.py)
 
 ## Conclusion générale:  
+
+Les images .bmp sont facile de compréhension par le fait qu'elles soient intuitivents. Toutes les données pevent s'y retrouver dans le bitmap info header, ce qui permet d'introduire facilement le codage des images. Pourtant le bmp n'est plus une extension d'image qu'on utilise régulièrement, au bénéfice du .jpg ou encore du .png. De plus, si on souhaite utiliser une extension d'image pour coder facilement, on aurais tendance à utiliser le .ppm face au .bmp.  
+
+ SAE 1.03 - Image  
+ Par Ludmann Dorian 1.3b
