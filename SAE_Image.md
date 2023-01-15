@@ -128,6 +128,12 @@ On peut retrouver un exemple d'utilisation du chiffre de Vernam dans le script B
 
 ### Question 8:  
 
-
+Pour réussir cette question, il suffit de fusionner les scripts B6 et B7 ensemble, pour pouvoir encoder et décoder un texte dans une image à l'aide d'une clé.  
+On voit que c'est effectivement assez simple de mettre en place, et que si on trouve un moyen de partager la clé, alors on peut facilement communiquer avec quelqu'un sans que personne puisse nous traquer.  
+On peut alors comprendre l'importance de la surveillance de masse, surtout sur le web par le fait qu'il est facilement possible de mettre en place un canal de communication privatisé, et que certaines personne puissent l'utiliser pour le mal.  
 
 ### Question 9:  
+
+La clé de Solitaire permet alors de répondre à la problématique posé par le chiffre de Vernam vu précédemment et cette clé peut être encodée de la même facon que le chiffre de Vernam dans une image (voir script B7.py et B8.py)
+
+## Conclusion générale:  
