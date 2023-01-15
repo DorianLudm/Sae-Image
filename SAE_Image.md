@@ -119,3 +119,15 @@ Encoder un texte dans une image est bien plus complexe que d'encoder une image d
 Il y a alors plusieurs possibilité, mais une seule est retenu par le fait qu'on ne peut pas modifier l'image initiale (du moins, ca ne doit pas être visible à l'oeil nu). On va alors utiliser la même méthode que le script B5.py mais un charactère va être encodé sur chaque composante RGB de 3 pixels! En effet, il y a 8 bits pour définir le charactère lui même, il reste alors un 9ème bit disponible. Ce neuvième bit sera utilisé pour définir si on doit continuer de décoder ou si l'entièreté du message à été décodé.  
 Enfin, il faut transformé chaque charactère du message en ASCII, puis en binaire avant de pouvoir l'intégrer des les pixels!
 Pour ce qui du décodage, on refais une nouvelle fois le procédé inverse.
+
+### Question 7:  
+
+Le chiffre de Vernam est incassable. En effet, il se base sur une clé qui est une suite de lettre, ce qui fait que pour un message de longueur x, il y a x^26 possibilités de clés! Pour un message de trois lettres, ca fait 17576 possiblités.   
+Seulement, il y a un problème de grande ampleur: "Comment transmettre cette clé ?". En effet cette clé est à usage unique, donc il faut réussir à la transmettre au destinataire à chaque fois sans que personne puisse l'intercepter, et c'est dans cette mesure qu'on peut dire que le chiffre de Vernam n'est pas incassable, par le simple fait qu'il faille réussir à transmettre cette clé au destinataire...  
+On peut retrouver un exemple d'utilisation du chiffre de Vernam dans le script B7.py
+
+### Question 8:  
+
+
+
+### Question 9:  

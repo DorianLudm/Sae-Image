@@ -13,7 +13,7 @@ if len(texte_to_encode) <= len(cle_encodage):
         for (char, valeur) in lettre.items():
             if val == valeur:
                 texte_encoded = texte_encoded + str(char)
-    print(texte_encoded)
+    print("Le texte encodé est: ", texte_encoded)
 else:
     print("La clé doit être au moins de la même taille que le message à encoder")
     
@@ -28,6 +28,6 @@ if len(texte_encoded) <= len(cle_encodage):
         for (char, valeur) in lettre.items():
             if val == valeur:
                 texte_decoded = texte_decoded + str(char)
-    print(texte_decoded)
+    print("Le texte déchiffrer est: ",texte_decoded)
 else:
     print("La clé doit être au moins de la même taille que le message puisse être décodé")
