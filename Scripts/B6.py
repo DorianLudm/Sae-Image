@@ -14,7 +14,7 @@ for y in range(i.size[1]): #Colonne
         sortie.putpixel((x,y),(valeur_R,valeur_G,valeur_B))
 sortie.save("./Images/Imageout_steg_1.bmp")
 
-#On obtient les valeurs de l'image à chacher
+#On obtient les valeurs du texte à chacher
 text = "Ce texte va etre cache dans l'image" #Attention, il à la longueur de la chaine de charactères. Celle-ci ne doit pas dépasser 1/3 des pixels de l'image
 list_val = []
 for character in text:

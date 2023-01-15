@@ -94,3 +94,26 @@ Pour réduire la taille de l'image 8, il suffit de supprimer les 252 couleurs no
 
 ## Partie B  
 
+Pour les questions de la partie B, vous pouvez retrouvez un programme python correspondant (appart pour la B9) dans le dossier ./Scripts  
+
+### Question 1 à 4:  
+
+Pour les quatres premières question, il suffit de prendre base sur le programme initial et d'y apporter de simple modifications:  
+
+- Pour le script 1, il faut inverser l'output (ligne,colonne) à (colonne,ligne) pour pouvoir obtenir la transposée de l'image.
+- Pour le script 2, il suffit de modifier l'output à (-ligne, colonne) pour avoir l'impression de voir l'image comme dans un miroir.
+- Pour le script 3, il suffit de modifier la valeur des pixels en ajoutant la ligne "gris = ((c[0]+c[1]+c[2])//3)", ce qui nous permet alors de définir chaque composante du pixel étant égale à gris
+- Enfin, pour le script 4, il suffit d'ajouter un if/else, et de mettre un putpixel dépendamment de si le pixel valide la condition ou non.  
+
+### Question 5:  
+
+Le programme B5.py détaille l'ensemble des procédures faites pour répondre à cette question mais nous allons reprendre ici les procédures importantes.  
+Tout d'abord, on modifie l'image initiale en modifiant la composante rouge à l'entier pair inférieur. Faire ceci nous permet alors de créer un espace de travail au sein de cette image. L'image que nous allons coder sera alors codée au sein du dernier bit de la composante rouge des pixels.  
+Suite à cela, on prend les valeurs de l'image à cacher en définissant si les pixels sont noirs ou blanc, et selon le résultat, on ajoute alors 0 ou 1 dans la composante rouge de l'image qui serviras d'intermédiaire.  
+
+Pour ce qui est du décodage, on utilise le procédé inverse, c'est à dire que l'on obtient les valeurs de l'image intermédiaire en extractant les 0 et 1 du dernier bit de la composante rouge de chaque pixel, et on défini alors une image à partir des 0 et 1, un 0 reviens à un pixel noir et un 1 à un pixel blanc. L'ensemble des pixels se regroupe alors pour former une chaine, et à terme restitue l'image entière!  
+
+### Question 6:  
+
+Encoder un texte dans une image est bien plus complexe que d'encoder une image dans une image (si l'image à cacher est en noire et blanc cela dit) par le fait qu'un seul charactère est définit sur 8 bits en ASCII.  
+Il y a alors plusieurs possibilité, mais une seule est retenu par le fait qu'on ne peut pas modifier l'image initiale (du moins, ca ne doit pas être visible à l'oeil nu). On va alors utiliser la même méthode que le script B5.py mais un charactère va être encodé sur chaque composante RGB de 3 pixels! En effet, il y a 8 bits pour définir le charactère lui même, il reste alors un 9ème bit disponible. Ce neuvième bit sera utilisé pour définir si on doit continuer de décoder ou si l'entièreté du message à été décodé
