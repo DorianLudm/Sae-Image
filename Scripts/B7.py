@@ -24,10 +24,11 @@ texte_decoded = ""
 if len(texte_encoded) == len(cle_encodage):
     for i in range(len(texte_encoded)):
         liste_val.append(((lettre[texte_encoded[i]]-lettre[cle_encodage[i]]+26)%26))
+    print(liste_val)
     for val in liste_val:
         for (char, valeur) in lettre.items():
             if val == valeur:
-                texte_encoded = texte_encoded + str(char)
+                texte_decoded = texte_decoded + str(char)
     print(texte_decoded)
 else:
     print("La clé doit être de la même taille que le message puisse être décodé")
