@@ -3,7 +3,7 @@
 ## Partie A  
 
 ### Question 0:  
-![Code de l'image 0](/RenduImages/Code0.png)  
+![Code de l'image 0](./RenduImages/Code0.png)  
 Cette image peut s'obtenir à l'aide de l'application Okteta, qui permet d'obtenir le code de n'importe quelle image en binaire, octal, décimal ou hexadécimal.  
 On utiliseras ici durant la plus grande partie du rendu l'héxadécimal par le fait qu'il est plus facile de lire les valeurs associées aux adresses.  
 
