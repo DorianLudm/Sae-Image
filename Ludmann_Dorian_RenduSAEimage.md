@@ -18,16 +18,16 @@ Expliquons désormais les valeurs que nous pouvons voir sur cette image:
 - Enfin, à l'adresse 0x18 on peut retrouver le nombre de bits par pixel. Cette valeur est défini sur 4 octets.
 
 Lorsqu'on essaye d'ouvrir l'image, on obtient l'erreur suivante:  
-![Code de l'erreur de l'image A0](/RenduImages/Error_A0.png)  
+![Code de l'erreur de l'image A0](./RenduImages/Error_A0.png)  
 Celle-ci se trouve par le fait que la taille du fichier entrée à l'adresse 0x02 n'est pas égale à la taille réelle du fichier. En effet, on code 99 73 0C 00 alors que le fichier possède une taille de 9A 73 0C 00  
 width or height exceeds limit
 ### Question 1:  
 En suivant la documentation donnée au début de la question, on peut facilement recoder une image de 4x4 facilement.  
-![Image 0](/RenduImages/Image0_Rendu.png) 
+![Image 0](./RenduImages/Image0_Rendu.png) 
 
 ### Question 2:  
 Pour efficacement arriver à l'image demandée dans cette question, on remarque que le fond est majoritairement rouge, ce qui nous permet alors de faciliter la construction en encodant tout les pixels avec 00 00 FF pour afficher une couleur rouge. Suite à cela, on ajoute alors les autres couleurs par dessus. Pour trouver facilement l'encodage des couleurs, on peut utiliser ctrl + F pour rechercher le nom de la couleur voulue, au lieu de la rechercher parmis les centaines de couleurs listées. Une fois avoir changer les 6 pixels qui ne sont pas rouges, on obtient alors l'image suivante:  
-![Image Test](/RenduImages/Imagetest_Rendu.png) 
+![Image Test](./RenduImages/Imagetest_Rendu.png) 
 
 ### Question 3:  
 Pour répondre aux questions posées dans la question A.3, on utiliseras la documentation disponible via le lien [suivant](https://www.apprendre-en-ligne.net/info/images/formatbmp.pdf)  
@@ -44,15 +44,15 @@ L'encodage des pixels seras détaillé ci-dessous
 - Comme dit au-dessus, à l'aide de l'adresse 0x2E, on peut trouver que l'image 2 possède 2 couleurs qui sont le rouge et le blanc
 - Pour ce qui est de l'encodage des pixels eux-mêmes, pour associer un pixel avec une couleur de la palette, il suffit d'appeler le numéro de palette sachant qu'elle à pour index 0. C'est à dire que pour la seconde couleur que nous avons codés, il suffit de mettre la valeur du bit à 1. Pour cette image, par le fait qu'elle ai seulement deux couleurs, chaque couleur est défini sur 1 bit, ce qui nous permet alors d'encoder les pixels via le binaire.
 - Pour changer tout les pixels rouge en pixels bleu, il suffit de modifier le code de la couleur rouge pour qu'elle code du bleu. Pour cela, on modifie alors l'adresse 0x36 et on obtient le code et l'image ci-dessous:  
-![Code de l'image bleue](/RenduImages/ImageBleue_Code.png)  
-![Image bleue](/RenduImages/ImageBleue_Rendu.png)  
+![Code de l'image bleue](./RenduImages/ImageBleue_Code.png)  
+![Image bleue](./RenduImages/ImageBleue_Rendu.png)  
 - Pour inverser les damiers de l'imag
 Skip course categories
 Course categories
 Etudiants - PAONest certainement la meilleure, surtout à grande échelle, par le fait qu'il faille uniquement changer 8 octets alors qu'il faudrais en modifier un nombre qui tend vers l'infceini plus l'image est grande.  
-![Image bleue inverse](/RenduImages/ImageBleueInverse_Rendu.png)  
+![Image bleue inverse](./RenduImages/ImageBleueInverse_Rendu.png)  
 - Comme dit précédemment, utilisé le binaire est bien plus intuitif pour codé des images avec une palette de deux couleurs, en voilà la raison:  
-![Code de l'image 3](/RenduImages/Image3_Code.png)  
+![Code de l'image 3](./RenduImages/Image3_Code.png)  
 ![Image 3](/RenduImages/Image3_Rendu.png)  
 Il suffit alors de mettre un 0 pour un pixel rouge, et un 1 pour un pixel blanc!
 - En lisant l'adresse 0x2E de l'image exemple index, on peut lire qu'elle possède 16 couleurs différentes. Chaque pixel va donc être codé sur un octet (16 = 2⁴, donc il faut 4 prévoir 4 bits pour appeler les couleurs de la palette)
@@ -61,16 +61,16 @@ Course categories
 Etudiants - PAONante dans l'image, elle se retrouve alors majoritairement dans le codage de celle-ci. On peut retrouver alors un grand nombre de C qui se repète. On peut alors déduire que ce C est la couleur blanche qui est majoritaire dans l'image. C étant égale à 12, la couleur blanche est la 13ème à être codée dans la palette de couleur. La couleur majoritaire est donc codée à l'adresse 0x66!
 - Pour trouver où commence le tableau de pixel, il suffit de lire l'adresse 0x0A où on peuttrouver comme valeur 76. Ce 76 signifie que l'adresse 0x76 est le début de la zone de définition des pixels.
 - En changeant quelque pixels de l'adresse 0x76 à 0x7A de C à 0, on peut remarquer que le coin inférieur gauche de l'image a effectivement été affecté de manière suivante:  
-![Coin inférieur droit zoomer de l'image à l'aide de GIMP](/RenduImages/ExtraitGimp.png)  
+![Coin inférieur droit zoomer de l'image à l'aide de GIMP](./RenduImages/ExtraitGimp.png)  
 - En diminuant le nombre de couleurs dans l'image exemple index, on obtient l'image exemple index 2, qui possède alors un nombre de couleur plus faible. Cette seconde version possède toujours 16 couleurs selon l'adresse 0x2E, et c'est par le fait qu'on retrouve en effet 16 couleurs dans la palette, mais qu'une majorité soit désormais égale à 00 00 00 00.  
 D'un point de vu viseul, on obtient alors l'image ci-contre:  
-![Image exemple index, mais avec moins de couleurs](/RenduImages/ImageIndex2_Rendu.png)  
+![Image exemple index, mais avec moins de couleurs](./RenduImages/ImageIndex2_Rendu.png)  
   
 ### Question 5:  
 Rappelant que la hauteur de l'image est défini à l'adresse 0x16, est que l'image 3 possède une hauteur de 00 00 00 04, pour trouver l'inverse on utilise l'encodage C2. FF FF FF FF représentant -1, FC FF FF FF est alors égal à -4! On obtient alors l'image suivante où l'ordre des lignes est inversé, c'est à dire que l'encodage ce fait du haut vers le bas:  
-![Image 3 inversé](/RenduImages/Image3Reverse_Rendu.png)  
+![Image 3 inversé](./RenduImages/Image3Reverse_Rendu.png)  
 De la même façon, on peut retourner le logo de l'iut pour obtenir l'image suivante  
-![Image exemple inversé](/RenduImages/ImageExempleReverse_Rendu.png) 
+![Image exemple inversé](./RenduImages/ImageExempleReverse_Rendu.png) 
   
 ### Question 6:  
 Suite à l'application de la conversion RLE, l'image 4 possède un poid de 1120 octets. Ce poid s'explique par le fait que la compression RLE créer une palette de 256 couleurs, même si l'image en utilise que deux.  
@@ -85,12 +85,12 @@ En différence au codage de l'image 4, on trouve le codage 04 00 (4 rouge) 04 01
 
 ### Question 8, 9 et 10:  
 Pour les question 8 à 10, on doit modifier le codage des pixels ainsi que la palette de couleur pour les question 9 et 10. Une fois avoir modifié les images, on obtient les images suivantes:  
-![Image 6](/RenduImages/Image6_Rendu2.png)
-![Image 7](/RenduImages/Image7_Rendu.png)
-![Image 8](/RenduImages/Image8_Rendu.png)  
+![Image 6](./RenduImages/Image6_Rendu2.png)
+![Image 7](./RenduImages/Image7_Rendu.png)
+![Image 8](./RenduImages/Image8_Rendu.png)  
 Pour réduire la taille de l'image 8, il suffit de supprimer les 252 couleurs non utilisés dans la palette de couleur et de redéfinir les valeurs de l'en-tête (poid de l'image, nombre de couleur dans la palette, ect)  
-![Poid image 9](/RenduImages/Image9Poid_Rendu.png)  
-![Image 9](/RenduImages/Image9_Rendu.png)  
+![Poid image 9](./RenduImages/Image9Poid_Rendu.png)  
+![Image 9](./RenduImages/Image9_Rendu.png)  
 
 ## Partie B  
 
